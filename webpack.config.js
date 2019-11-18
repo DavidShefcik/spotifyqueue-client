@@ -5,7 +5,6 @@
 // Module imports
 const webpack = require('webpack')
 const path = require('path')
-require('dotenv').config()
 
 // Config
 module.exports = {
