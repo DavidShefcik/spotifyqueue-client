@@ -6,15 +6,44 @@
 
 // Module imports
 import { hot } from 'react-hot-loader'
-import React from 'react'
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+// CSS imports
+import './css/App.css'
+
+// Page imports
+import Home from '../pages/Home/index'
 
 // Component
-const App = () => {
-  return (
-    <div>
-      <p>App!</p>
-    </div>
-  )
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      routes: [
+        {
+          key: 'home',
+          path: '/',
+          component: <Home />
+        }
+      ]
+    }
+  }
+  render() {
+    return (
+      <Router>
+        <Switch>
+          {this.state.routes.map(value => {
+            return (
+              <Route path={value.path} key={value.key}>
+                {value.component}
+              </Route>
+            )
+          })}
+        </Switch>
+      </Router>
+    )
+  }
 }
 
 // Export

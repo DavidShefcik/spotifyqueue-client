@@ -8,6 +8,7 @@ const path = require('path')
 
 // Config
 module.exports = {
+  entry: ['react-hot-loader/patch', './src'],
   module: {
     rules: [
       {
@@ -27,7 +28,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   output: {
     path: path.join(__dirname, 'dist/'),
