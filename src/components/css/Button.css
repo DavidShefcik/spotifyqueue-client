@@ -33,4 +33,16 @@
   user-select: none;
   background-color: #1db954;
   padding: 11px 44px;
+  cursor: pointer;
+}
+
+.container:hover {
+  outline: none;
+  -webkit-transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+  transition: none 33ms cubic-bezier(.3, 0, 0, 1);
+  -webkit-transition-property: all;
+  transition-property: all;
+  -webkit-transform: scale(1.06);
+  transform: scale(1.06);
+  background-color: #1ed760;
 }

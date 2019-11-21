@@ -12,9 +12,8 @@ import styles from './css/Button.css'
 
 // Component
 const Button = props => {
-  console.log(styles)
   return (
-    <div className={styles.container}>
+    <div className={styles.container} title={props.text} onClick={props.action}>
       <p>{props.text}</p>
     </div>
   )

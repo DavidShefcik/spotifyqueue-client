@@ -17,7 +17,7 @@ import Button from '../../components/Button'
 const Default = () => {
   return (
     <div>
-      <Button text="Button" />
+      <Button text="Alert" action={() => window.alert('Hello!')} />
     </div>
   )
 }
