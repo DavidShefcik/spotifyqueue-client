@@ -16,8 +16,21 @@ import Button from '../../components/Button'
 // Component
 const Default = () => {
   return (
-    <div>
-      <Button text="Alert" action={() => window.alert('Hello!')} />
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div className={styles.textArea}>
+          <p className={styles.title}>Queue for Spotify</p>
+          <p className={styles.subtitle}>
+            Share a queue without passing around the device.
+          </p>
+        </div>
+        <div>
+          <Button text="Log In" action={() => window.alert('Hello!')} />
+        </div>
+        <div>
+          <Button text="Join a Session" action={() => window.alert('Hello!')} />
+        </div>
+      </div>
     </div>
   )
 }
