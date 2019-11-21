@@ -10,10 +10,13 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // CSS imports
-import './css/App.css'
+import styles from './css/App.css'
 
 // Page imports
 import Home from '../pages/Home/index'
+
+// Component imports
+import Footer from '../components/Footer'
 
 // Component
 class App extends Component {
@@ -35,12 +38,19 @@ class App extends Component {
         <Switch>
           {this.state.routes.map(value => {
             return (
-              <Route path={value.path} key={value.key}>
-                {value.component}
-              </Route>
+              <span>
+                <Route
+                  path={value.path}
+                  key={value.key}
+                  className={styles.page}
+                >
+                  {value.component}
+                </Route>
+              </span>
             )
           })}
         </Switch>
+        <Footer />
       </Router>
     )
   }

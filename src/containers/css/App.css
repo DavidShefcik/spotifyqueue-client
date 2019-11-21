@@ -10,3 +10,18 @@ body {
   background-color: #191414;
   font: 15px/1.5 "Roboto";
 }
+
+.page {
+  min-height: 100vh;
+}
+
+a {
+  color: #e8e8e8;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: white;
+  text-decoration: underline;
+}
