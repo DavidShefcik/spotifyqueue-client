@@ -10,11 +10,14 @@ import React from 'react'
 // CSS imports
 import styles from './css/Default.css'
 
+// Component props
+import Button from '../../components/Button'
+
 // Component
 const Default = () => {
   return (
     <div>
-      <p>Default</p>
+      <Button text="Button" />
     </div>
   )
 }
