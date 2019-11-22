@@ -5,18 +5,45 @@
  */
 
 // Module imports
-import React from 'react'
+import React, { Component } from 'react'
 
 // CSS imports
 import styles from './css/LoadingPage.css'
 
 // Component
-const LoadingPage = props => {
-  return (
-    <div>
-      <p>Loading page</p>
-    </div>
-  )
+class LoadingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dots: ""
+    }
+  }
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      if(this.state.dots.length >= 3) {
+        this.setState({
+          dots: ""
+        });
+      } else {
+        let dots = this.state.dots;
+        this.setState({
+          dots: dots += "."
+        })
+      }
+    }, 350);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  render() {
+    return (
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <p>{this.props.text + this.state.dots}</p>
+        </div>
+      </div>
+    );
+  }
 }
 
 // Export

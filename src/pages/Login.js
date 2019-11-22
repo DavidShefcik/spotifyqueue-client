@@ -5,18 +5,20 @@
  */
 
 // Module imports
-import React from 'react'
+import React, { Component } from 'react'
 
 // Component imports
 import LoadingPage from '../components/LoadingPage'
 
 // Component
-const Login = () => {
-  return (
-    <div>
-      <LoadingPage />
-    </div>
-  )
+class Login extends Component {
+  render() {
+    return (
+      <div>
+        <LoadingPage text="Redirecting you to Spotify"/>
+      </div>
+    )
+  }
 }
 
 // Export
