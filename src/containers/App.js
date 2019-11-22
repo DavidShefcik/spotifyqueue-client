@@ -43,7 +43,6 @@ class App extends Component {
       <Router>
         <Switch>
           {this.state.routes.map(value => {
-            console.log(value);
             return (
                 <Route path={value.path} className={styles.page} key={value.key}>
                   {value.component}
