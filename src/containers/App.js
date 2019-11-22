@@ -14,6 +14,7 @@ import styles from './css/App.css'
 
 // Page imports
 import Home from '../pages/Home/index'
+import Login from '../pages/Login'
 
 // Component imports
 import Footer from '../components/Footer'
@@ -24,6 +25,11 @@ class App extends Component {
     super(props)
     this.state = {
       routes: [
+        {
+          key: 'login',
+          path: '/login',
+          component: <Login />
+        },
         {
           key: 'home',
           path: '/',
@@ -37,16 +43,11 @@ class App extends Component {
       <Router>
         <Switch>
           {this.state.routes.map(value => {
+            console.log(value);
             return (
-              <span>
-                <Route
-                  path={value.path}
-                  key={value.key}
-                  className={styles.page}
-                >
+                <Route path={value.path} className={styles.page} key={value.key}>
                   {value.component}
                 </Route>
-              </span>
             )
           })}
         </Switch>
