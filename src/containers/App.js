@@ -15,6 +15,7 @@ import styles from './css/App.css'
 // Page imports
 import Home from '../pages/Home/index'
 import Login from '../pages/Login'
+import Callback from '../pages/Callback'
 
 // Component imports
 import Footer from '../components/Footer'
@@ -25,6 +26,11 @@ class App extends Component {
     super(props)
     this.state = {
       routes: [
+        {
+          key: 'callback',
+          path: '/callback',
+          component: <Callback />
+        },
         {
           key: 'login',
           path: '/login',
@@ -44,9 +50,9 @@ class App extends Component {
         <Switch>
           {this.state.routes.map(value => {
             return (
-                <Route path={value.path} className={styles.page} key={value.key}>
-                  {value.component}
-                </Route>
+              <Route path={value.path} className={styles.page} key={value.key}>
+                {value.component}
+              </Route>
             )
           })}
         </Switch>

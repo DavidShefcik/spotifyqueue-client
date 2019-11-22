@@ -7,8 +7,6 @@
 // Module imports
 import axios from 'axios'
 
-console.log(process.env.API)
-
 // Config
 const axiosConfig = axios.create({
   baseURL: process.env.API,

@@ -1,7 +1,7 @@
 /*
  * Author: David Shefcik
  * Created: 11/21/19
- * Project | File: Spotify Queue Client | src/pages/Login.js
+ * Project | File: Spotify Queue Client | src/pages/Callback.js
  */
 
 // Module imports
@@ -12,12 +12,12 @@ import axiosConfig from '../modules/axiosConfig'
 import LoadingPage from '../components/LoadingPage'
 
 // Component
-class Login extends Component {
+class CallbackPage extends Component {
   componentDidMount() {
     axiosConfig
-      .get('/auth/login')
+      .post('/auth/callback', { code: this.props.location.query.code })
       .then(res => {
-        window.location.href = res['data']['url']
+        console.log(res['data'])
       })
       .catch(error => {
         if (process.env.PRODUCTION === 'false') {
@@ -29,11 +29,11 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <LoadingPage text="Redirecting you to Spotify" />
+        <LoadingPage text="Please wait" />
       </div>
     )
   }
 }
 
 // Export
-export default Login
+export default CallbackPage
