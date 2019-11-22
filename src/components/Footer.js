@@ -6,7 +6,6 @@
 
 // Module imports
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 // CSS imports
 import styles from './css/Footer.css'
