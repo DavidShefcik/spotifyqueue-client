@@ -6,6 +6,7 @@
 
 // Module imports
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // CSS imports
 import styles from './css/Default.css'
@@ -25,7 +26,9 @@ const Default = () => {
           </p>
         </div>
         <div>
-          <Button text="Log In" action={() => window.alert('Hello!')} />
+          <Link to="/login" title="Log In">
+            <Button text="Log In" action={() => {}} />
+          </Link>
         </div>
         <div>
           <Button text="Join a Session" action={() => window.alert('Hello!')} />
