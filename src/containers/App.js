@@ -29,17 +29,17 @@ class App extends Component {
         {
           key: 'callback',
           path: '/callback',
-          component: <Callback />
+          component: Callback
         },
         {
           key: 'login',
           path: '/login',
-          component: <Login />
+          component: Login
         },
         {
           key: 'home',
           path: '/',
-          component: <Home />
+          component: Home
         }
       ]
     }
@@ -50,9 +50,12 @@ class App extends Component {
         <Switch>
           {this.state.routes.map(value => {
             return (
-              <Route path={value.path} className={styles.page} key={value.key}>
-                {value.component}
-              </Route>
+              <Route
+                path={value.path}
+                className={styles.page}
+                key={value.key}
+                component={value.component}
+              />
             )
           })}
         </Switch>

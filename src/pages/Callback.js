@@ -7,6 +7,7 @@
 // Module imports
 import React, { Component } from 'react'
 import axiosConfig from '../modules/axiosConfig'
+import queryString from 'query-string'
 
 // Component imports
 import LoadingPage from '../components/LoadingPage'
@@ -15,7 +16,9 @@ import LoadingPage from '../components/LoadingPage'
 class CallbackPage extends Component {
   componentDidMount() {
     axiosConfig
-      .post('/auth/callback', { code: this.props.location.query.code })
+      .post('/auth/callback', {
+        code: queryString.parse(this.props.location.search).code
+      })
       .then(res => {
         console.log(res['data'])
       })
@@ -23,7 +26,7 @@ class CallbackPage extends Component {
         if (process.env.PRODUCTION === 'false') {
           console.log(error)
         }
-        this.context.router.history.push('/error')
+        this.props.history.push('/error')
       })
   }
   render() {
