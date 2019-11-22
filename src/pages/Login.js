@@ -6,16 +6,29 @@
 
 // Module imports
 import React, { Component } from 'react'
+import axiosConfig from '../modules/axiosConfig'
 
 // Component imports
 import LoadingPage from '../components/LoadingPage'
 
 // Component
 class Login extends Component {
+  componentDidMount() {
+    axiosConfig
+      .get('/auth/login')
+      .then(res => {
+        console.log(res['data'])
+      })
+      .catch(error => {
+        if (process.env.PRODUCTION === 'false') {
+          console.log(error)
+        }
+      })
+  }
   render() {
     return (
       <div>
-        <LoadingPage text="Redirecting you to Spotify"/>
+        <LoadingPage text="Redirecting you to Spotify" />
       </div>
     )
   }

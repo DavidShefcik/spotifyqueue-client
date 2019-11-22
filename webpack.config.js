@@ -4,6 +4,7 @@
 
 // Module imports
 const webpack = require('webpack')
+const Dotenv = require('dotenv-webpack')
 const path = require('path')
 
 // Config
@@ -27,6 +28,9 @@ module.exports = {
       }
     ]
   },
+  node: {
+    fs: 'empty'
+  },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
     alias: {
@@ -45,5 +49,5 @@ module.exports = {
     hotOnly: true,
     historyApiFallback: true
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [new webpack.HotModuleReplacementPlugin(), new Dotenv()]
 }
