@@ -8,6 +8,12 @@
 import React, { Component } from 'react'
 import axiosConfig from '../modules/axiosConfig'
 import queryString from 'query-string'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+
+// Redux imports
+import { setUser } from '../modules/redux/actions/userActions'
+import { setToken } from '../modules/redux/actions/tokenActions'
 
 // Component imports
 import LoadingPage from '../components/LoadingPage'
@@ -20,7 +26,9 @@ class CallbackPage extends Component {
         code: queryString.parse(this.props.location.search).code
       })
       .then(res => {
-        console.log(res['data'])
+        this.props.setUser(res['data']['user']['username'])
+        this.props.setToken(res['data']['user']['token'])
+        this.props.history.push('/')
       })
       .catch(error => {
         if (process.env.PRODUCTION === 'false') {
@@ -38,5 +46,11 @@ class CallbackPage extends Component {
   }
 }
 
+// Prop types
+CallbackPage.propTypes = {
+  setToken: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired
+}
+
 // Export
-export default CallbackPage
+export default connect(null, { setToken, setUser })(CallbackPage)

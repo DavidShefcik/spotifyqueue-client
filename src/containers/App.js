@@ -24,7 +24,7 @@ import Footer from '../components/Footer'
 import LoadingPage from '../components/LoadingPage'
 
 // Redux imports
-import { store, persistor } from '../modules/redux'
+import reduxStore from '../modules/redux'
 
 // Component
 class App extends Component {
@@ -52,10 +52,10 @@ class App extends Component {
   }
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={reduxStore().store}>
         <PersistGate
           loading={<LoadingPage text="Please wait" />}
-          persistor={persistor}
+          persistor={reduxStore().persistor}
         >
           <Router>
             <Switch>
