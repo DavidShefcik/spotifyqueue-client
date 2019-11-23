@@ -9,7 +9,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import { CookieStorage } from 'redux-persist-cookie-storage'
-import Cookies from 'cookies-js'
+import Cookies from 'js-cookie'
 
 // Reducer imports
 import root from './reducers/root'
@@ -22,7 +22,7 @@ const middleware = [thunk]
 Cookies.defaults.expires = 30
 Cookies.defaults.path = '/'
 Cookies.defaults.domain = process.env.COOKIE_DOMAIN
-Cookies.defaults.secure = true
+Cookies.defaults.secure = false
 
 // Config
 const composeEnhancers =
@@ -52,7 +52,7 @@ if (process.env.PRODUCTION === 'false') {
 }
 
 // Persistor
-let persistor = persistStore(store, {})
+let persistor = persistStore(store)
 
 // Export
 export default () => {
