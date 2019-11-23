@@ -8,6 +8,8 @@
 import { hot } from 'react-hot-loader'
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 // CSS imports
 import styles from './css/App.css'
@@ -19,6 +21,10 @@ import Callback from '../pages/Callback'
 
 // Component imports
 import Footer from '../components/Footer'
+import LoadingPage from '../components/LoadingPage'
+
+// Redux imports
+import { store, persistor } from '../modules/redux'
 
 // Component
 class App extends Component {
@@ -46,21 +52,28 @@ class App extends Component {
   }
   render() {
     return (
-      <Router>
-        <Switch>
-          {this.state.routes.map(value => {
-            return (
-              <Route
-                path={value.path}
-                className={styles.page}
-                key={value.key}
-                component={value.component}
-              />
-            )
-          })}
-        </Switch>
-        <Footer />
-      </Router>
+      <Provider store={store}>
+        <PersistGate
+          loading={<LoadingPage text="Please wait" />}
+          persistor={persistor}
+        >
+          <Router>
+            <Switch>
+              {this.state.routes.map(value => {
+                return (
+                  <Route
+                    path={value.path}
+                    className={styles.page}
+                    key={value.key}
+                    component={value.component}
+                  />
+                )
+              })}
+            </Switch>
+            <Footer />
+          </Router>
+        </PersistGate>
+      </Provider>
     )
   }
 }
