@@ -22,7 +22,11 @@ const middleware = [thunk]
 Cookies.defaults.expires = 30
 Cookies.defaults.path = '/'
 Cookies.defaults.domain = process.env.COOKIE_DOMAIN
-Cookies.defaults.secure = false
+if (process.env.PRODUCTION === 'false') {
+  Cookies.defaults.secure = false
+} else {
+  Cookies.defaults.secure = true
+}
 
 // Config
 const composeEnhancers =
