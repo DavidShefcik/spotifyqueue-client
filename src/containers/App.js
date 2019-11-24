@@ -18,6 +18,7 @@ import styles from './css/App.css'
 import Home from '../pages/Home/index'
 import Login from '../pages/Login'
 import Callback from '../pages/Callback'
+import Logout from '../pages/Logout'
 
 // Component imports
 import Footer from '../components/Footer'
@@ -32,6 +33,11 @@ class App extends Component {
     super(props)
     this.state = {
       routes: [
+        {
+          key: 'logout',
+          path: '/logout',
+          component: Logout
+        },
         {
           key: 'callback',
           path: '/callback',
