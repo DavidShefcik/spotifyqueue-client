@@ -30,9 +30,6 @@ const Default = () => {
             <Button text="Log In" action={() => {}} />
           </Link>
         </div>
-        <div>
-          <Button text="Join a Session" action={() => window.alert('Hello!')} />
-        </div>
       </div>
     </div>
   )
