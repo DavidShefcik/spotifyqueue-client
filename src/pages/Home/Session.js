@@ -24,7 +24,6 @@ class Session extends Component {
     }
   }
   render() {
-    console.log(this.props)
     return (
       <div className={styles.container}>
         <div className={styles.content}>

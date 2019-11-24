@@ -19,6 +19,7 @@ import Home from '../pages/Home/index'
 import Login from '../pages/Login'
 import Callback from '../pages/Callback'
 import Logout from '../pages/Logout'
+import Queue from '../pages/Queue'
 
 // Component imports
 import Footer from '../components/Footer'
@@ -33,6 +34,11 @@ class App extends Component {
     super(props)
     this.state = {
       routes: [
+        {
+          key: 'queue',
+          path: '/queue',
+          component: Queue
+        },
         {
           key: 'logout',
           path: '/logout',
