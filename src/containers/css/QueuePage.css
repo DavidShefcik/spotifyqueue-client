@@ -24,12 +24,12 @@
 .code {
   display: inline-block;
   float: left;
-  width: 20%;
+  width: 150px;
 }
 
 .title {
   display: inline-block;
-  margin-left: calc(-20% - 20px);
+  margin-left: calc(-170px);
 }
 
 @media screen and (max-width: 768px) {
