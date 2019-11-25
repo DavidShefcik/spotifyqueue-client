@@ -27,7 +27,8 @@ class QueuePage extends Component {
       songs: [],
       ownerid: '',
       ownerName: '',
-      renderPage: false
+      renderPage: false,
+      isOwner: false
     }
   }
   componentDidMount() {
@@ -47,9 +48,26 @@ class QueuePage extends Component {
           .get('/users/' + this.state.ownerid, { headers: { token: token } })
           .then(res => {
             this.setState({
-              ownerName: res['data']['user']['username'],
-              renderPage: true
+              ownerName: res['data']['user']['username']
             })
+            axiosConfig
+              .get('/queue/' + this.state.queueid + '/isowner', {
+                headers: { token: token }
+              })
+              .then(r => {
+                if (r['data']['isOwner']) {
+                  this.setState({
+                    isOwner: true,
+                    renderPage: true
+                  })
+                }
+              })
+              .catch(error => {
+                if (process.env.PRODUCTION === 'false') {
+                  console.log(error)
+                }
+                this.props.history.push('/error')
+              })
           })
           .catch(error => {
             if (process.env.PRODUCTION === 'false') {
@@ -81,6 +99,8 @@ class QueuePage extends Component {
               {this.state.ownerName}'s Spotify Queue
             </p>
           </div>
+          <div className={styles.queueContent}></div>
+          <div className={styles.queueController}></div>
         </div>
       </div>
     ) : (

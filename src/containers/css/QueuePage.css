@@ -32,6 +32,11 @@
   margin-left: calc(-170px);
 }
 
+.queueContent {
+  min-height: calc(100vh - 50px);
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
 
   .code,
@@ -44,5 +49,10 @@
 
   .title {
     margin-left: auto;
+  }
+
+  .queueContent {
+    min-height: calc(100vh - 94px);
+    width: 100%;
   }
 }
