@@ -1,0 +1,30 @@
+.container {
+  width: auto;
+  height: 50px;
+  float: left;
+}
+
+.code {
+  list-style: none;
+  display: inline;
+}
+
+.code>li {
+  display: inline;
+  padding: 3px 5px;
+  background-color: black;
+  border-radius: 5px;
+  font-size: 18px;
+  margin: 0 2px;
+}
+
+@media screen and (max-width: 768px) {
+
+  .container {
+    display: block;
+    width: 100%;
+    float: none;
+    text-align: center;
+    float: none;
+  }
+}

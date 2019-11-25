@@ -12,6 +12,10 @@ import { connect } from 'react-redux'
 // CSS imports
 import styles from './css/QueuePage.css'
 
+// Component imports
+import Code from '../components/queue/Code'
+import LoadingPage from '../components/LoadingPage'
+
 // Component
 class QueuePage extends Component {
   constructor(props) {
@@ -22,7 +26,8 @@ class QueuePage extends Component {
       members: [],
       songs: [],
       ownerid: '',
-      ownerName: ''
+      ownerName: '',
+      renderPage: false
     }
   }
   componentDidMount() {
@@ -42,7 +47,8 @@ class QueuePage extends Component {
           .get('/users/' + this.state.ownerid, { headers: { token: token } })
           .then(res => {
             this.setState({
-              ownerName: res['data']['user']['username']
+              ownerName: res['data']['user']['username'],
+              renderPage: true
             })
           })
           .catch(error => {
@@ -60,17 +66,25 @@ class QueuePage extends Component {
       })
   }
   render() {
-    return (
+    let renderPage = this.state.renderPage
+    return renderPage ? (
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.header}>
-            <p className={styles.code}>Code here</p>
+            <Code
+              code={this.state.code}
+              queueid={this.props.id}
+              className={styles.code}
+              history={this.props.history}
+            />
             <p className={styles.title}>
               {this.state.ownerName}'s Spotify Queue
             </p>
           </div>
         </div>
       </div>
+    ) : (
+      <LoadingPage text="Please wait" />
     )
   }
 }
