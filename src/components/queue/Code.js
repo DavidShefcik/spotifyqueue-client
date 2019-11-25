@@ -25,74 +25,62 @@ class Code extends Component {
   }
   componentDidMount() {
     let token = this.props.token
-    axiosConfig
-      .get('/queue/' + this.props.queueid + '/isowner', {
-        headers: { token: token }
-      })
-      .then(r => {
-        if (r['data']['isOwner']) {
-          this.setState(
-            {
-              code: this.props.code,
-              renderCode: true
-            },
-            () => {
-              this.interval = setInterval(() => {
-                let count = this.state.count
-                let length = this.state.length
-                if (length <= 0) {
-                  this.setState({
-                    length: 150
-                  })
-                } else {
-                  length = length - 5
-                  this.setState({
-                    length: length
-                  })
-                }
-                if (count <= 0) {
-                  axiosConfig
-                    .post(
-                      '/queue/code/update',
-                      { id: this.props.queueid },
-                      { headers: { token: token } }
-                    )
-                    .then(res => {
-                      count = 30
-                      this.setState({
-                        count: count,
-                        code: res['data']['code']
-                      })
-                    })
-                    .catch(error => {
-                      if (process.env.PRODUCTION === 'false') {
-                        console.log(error)
-                      }
-                      this.props.history.push('/error')
-                    })
-                } else {
-                  count -= 1
-                  this.setState({
-                    count: count
-                  })
-                }
-              }, 1000)
+    if (this.props.isOwner) {
+      this.setState(
+        {
+          code: this.props.code,
+          renderCode: true
+        },
+        () => {
+          this.interval = setInterval(() => {
+            let count = this.state.count
+            let length = this.state.length
+            if (length <= 0) {
+              this.setState({
+                length: 150
+              })
+            } else {
+              length = length - 5
+              this.setState({
+                length: length
+              })
             }
-          )
-        } else {
-          this.setState({
-            code: this.props.code,
-            renderCode: true
-          })
-          this.interval = null
+            if (count <= 0) {
+              axiosConfig
+                .post(
+                  '/queue/code/update',
+                  { id: this.props.queueid },
+                  { headers: { token: token } }
+                )
+                .then(res => {
+                  count = 30
+                  this.setState({
+                    count: count,
+                    code: res['data']['code']
+                  })
+                })
+                .catch(error => {
+                  if (process.env.PRODUCTION === 'false') {
+                    console.log(error)
+                  }
+                  this.props.history.push('/error')
+                })
+            } else {
+              count -= 1
+              this.setState({
+                count: count
+              })
+            }
+          }, 1000)
         }
+      )
+    } else {
+      this.setState({
+        code: this.props.code,
+        renderCode: true
       })
-      .catch(error => {
-        if (process.env.PRODUCTION === 'false') {
-          console.log(error)
-        }
-        this.props.history.push('/error')
-      })
+      this.interval = null
+    }
   }
   componentWillUnmount() {
     clearInterval(this.interval)
@@ -109,12 +97,16 @@ class Code extends Component {
             <p>Wait a second</p>
           )}
         </ul>
-        <hr
-          className={styles.line}
-          style={{
-            width: `${this.state.length}px`
-          }}
-        />
+        {this.props.isOwner ? (
+          <hr
+            className={styles.line}
+            style={{
+              width: `${this.state.length}px`
+            }}
+          />
+        ) : (
+          <span />
+        )}
       </span>
     )
   }

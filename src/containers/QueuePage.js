@@ -55,9 +55,13 @@ class QueuePage extends Component {
                 headers: { token: token }
               })
               .then(r => {
-                if (r['data']['isOwner']) {
+                if (!r['data']['isOwner']) {
                   this.setState({
                     isOwner: true,
+                    renderPage: true
+                  })
+                } else {
+                  this.setState({
                     renderPage: true
                   })
                 }
@@ -94,6 +98,7 @@ class QueuePage extends Component {
               queueid={this.props.id}
               className={styles.code}
               history={this.props.history}
+              isOwner={this.state.isOwner}
             />
             <p className={styles.title}>
               {this.state.ownerName}'s Spotify Queue
