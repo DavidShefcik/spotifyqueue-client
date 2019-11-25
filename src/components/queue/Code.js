@@ -19,6 +19,7 @@ class Code extends Component {
     this.state = {
       count: 30,
       code: '',
+      length: 150,
       renderCode: false
     }
   }
@@ -38,6 +39,17 @@ class Code extends Component {
             () => {
               this.interval = setInterval(() => {
                 let count = this.state.count
+                let length = this.state.length
+                if (length <= 0) {
+                  this.setState({
+                    length: 150
+                  })
+                } else {
+                  length = length - 5
+                  this.setState({
+                    length: length
+                  })
+                }
                 if (count <= 0) {
                   axiosConfig
                     .post(
@@ -88,17 +100,21 @@ class Code extends Component {
   render() {
     return (
       <span className={styles.container}>
-        {this.state.renderCode ? (
-          this.state.code.split('').map((value, index) => {
-            return (
-              <ul key={index} className={styles.code}>
-                <li>{value}</li>
-              </ul>
-            )
-          })
-        ) : (
-          <p>Hello</p>
-        )}
+        <ul className={styles.code}>
+          {this.state.renderCode ? (
+            this.state.code.split('').map((value, index) => {
+              return <li key={index}>{value}</li>
+            })
+          ) : (
+            <p>Wait a second</p>
+          )}
+        </ul>
+        <hr
+          className={styles.line}
+          style={{
+            width: `${this.state.length}px`
+          }}
+        />
       </span>
     )
   }

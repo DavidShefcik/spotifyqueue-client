@@ -1,12 +1,12 @@
 .container {
-  width: auto;
+  width: 145px;
   height: 50px;
   float: left;
 }
 
 .code {
+  height: 43px;
   list-style: none;
-  display: inline;
 }
 
 .code>li {
@@ -18,13 +18,29 @@
   margin: 0 2px;
 }
 
-@media screen and (max-width: 768px) {
+.line {
+  background-color: #1db954;
+  width: 145px;
+  height: 1px;
+  border: 0;
+  display: block;
+  margin: auto;
+  float: left;
+}
 
+@media screen and (max-width: 768px) {
   .container {
-    display: block;
-    width: 100%;
-    float: none;
-    text-align: center;
     float: none;
   }
+
+  .line {
+    float: none;
+    background-color: #1db954;
+    width: 145px;
+    height: 1px;
+    border: 0;
+    display: block;
+    margin: auto;
+  }
+
 }
