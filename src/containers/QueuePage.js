@@ -15,6 +15,8 @@ import styles from './css/QueuePage.css'
 // Component imports
 import Code from '../components/queue/Code'
 import LoadingPage from '../components/LoadingPage'
+import RedButton from '../components/RedButton'
+import SongInfo from '../components/SongInfo'
 
 // Component
 class QueuePage extends Component {
@@ -28,7 +30,8 @@ class QueuePage extends Component {
       ownerid: '',
       ownerName: '',
       renderPage: false,
-      isOwner: false
+      isOwner: false,
+      currentSong: {}
     }
   }
   componentDidMount() {
@@ -37,34 +40,50 @@ class QueuePage extends Component {
     axiosConfig
       .get('/queue/' + this.props.id, { headers: { token: token } })
       .then(res => {
-        this.setState({
-          queueid: res['data']['queue']['queueid'],
-          code: res['data']['queue']['code'],
-          members: res['data']['queue']['members'],
-          songs: res['data']['queue']['songs'],
-          ownerid: res['data']['queue']['ownerid']
-        })
-        axiosConfig
-          .get('/users/' + this.state.ownerid, { headers: { token: token } })
-          .then(res => {
-            this.setState({
-              ownerName: res['data']['user']['username']
-            })
+        this.setState(
+          {
+            queueid: res['data']['queue']['queueid'],
+            code: res['data']['queue']['code'],
+            members: res['data']['queue']['members'],
+            songs: res['data']['queue']['songs'],
+            ownerid: res['data']['queue']['ownerid']
+          },
+          () => {
+            if (this.state.songs.length > 0) {
+              this.setState({
+                currentSong: this.state.songs[0]
+              })
+            }
             axiosConfig
-              .get('/queue/' + this.state.queueid + '/isowner', {
+              .get('/users/' + this.state.ownerid, {
                 headers: { token: token }
               })
-              .then(r => {
-                if (!r['data']['isOwner']) {
-                  this.setState({
-                    isOwner: true,
-                    renderPage: true
+              .then(res => {
+                this.setState({
+                  ownerName: res['data']['user']['username']
+                })
+                axiosConfig
+                  .get('/queue/' + this.state.queueid + '/isowner', {
+                    headers: { token: token }
                   })
-                } else {
-                  this.setState({
-                    renderPage: true
+                  .then(r => {
+                    if (r['data']['isOwner']) {
+                      this.setState({
+                        isOwner: true,
+                        renderPage: true
+                      })
+                    } else {
+                      this.setState({
+                        renderPage: true
+                      })
+                    }
                   })
-                }
+                  .catch(error => {
+                    if (process.env.PRODUCTION === 'false') {
+                      console.log(error)
+                    }
+                    this.props.history.push('/error')
+                  })
               })
               .catch(error => {
                 if (process.env.PRODUCTION === 'false') {
@@ -72,19 +91,8 @@ class QueuePage extends Component {
                 }
                 this.props.history.push('/error')
               })
-          })
-          .catch(error => {
-            if (process.env.PRODUCTION === 'false') {
-              console.log(error)
-            }
-            this.props.history.push('/error')
-          })
-      })
-      .catch(error => {
-        if (process.env.PRODUCTION === 'false') {
-          console.log(error)
-        }
-        this.props.history.push('/error')
+          }
+        )
       })
   }
   render() {
@@ -104,8 +112,29 @@ class QueuePage extends Component {
               {this.state.ownerName}'s Spotify Queue
             </p>
           </div>
+          <div className={styles.queueController}>
+            <div className={styles.queuControllerContent}>
+              <div className={styles.songInfoArea}>
+                <SongInfo
+                  song={this.state.currentSong}
+                  history={this.props.history}
+                />
+              </div>
+              {this.state.isOwner ? (
+                <div className={styles.button}>
+                  <RedButton text="End Session" action={() => window.alert()} />
+                </div>
+              ) : (
+                <div className={styles.button}>
+                  <RedButton
+                    text="Leave Session"
+                    action={() => window.alert()}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
           <div className={styles.queueContent}></div>
-          <div className={styles.queueController}></div>
         </div>
       </div>
     ) : (

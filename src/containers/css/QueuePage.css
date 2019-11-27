@@ -37,6 +37,29 @@
   width: 100%;
 }
 
+.queueController {
+  width: 100%;
+  height: 50px;
+  background-color: #191414;
+  position: fixed;
+  bottom: 0;
+}
+
+.queuControllerContent {
+  overflow: auto;
+  line-height: 50px;
+}
+
+.songInfoArea {
+  float: left;
+  margin-left: 9px;
+}
+
+.button {
+  float: right !important;
+  margin: 9px;
+}
+
 @media screen and (max-width: 768px) {
 
   .code,

@@ -1,0 +1,17 @@
+.container {
+  width: 100px;
+  background-color: #c42929;
+  border: 1px solid #940606;
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  line-height: 20px !important;
+}
+
+.container:hover,
+.container:focus {
+  background-color: #940606;
+}
