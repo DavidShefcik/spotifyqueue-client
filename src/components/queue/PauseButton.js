@@ -20,7 +20,7 @@ class PauseButton extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <FontAwesome name="pause" />
+        <FontAwesome name="pause" className={styles.icon} />
       </div>
     )
   }
