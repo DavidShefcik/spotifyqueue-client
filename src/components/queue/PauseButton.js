@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 
 // CSS imports
 import styles from './css/SongController.css'
+import faStyles from '../../../node_modules/font-awesome/css/font-awesome.min.css'
 
 // Component imports
 import FontAwesome from 'react-fontawesome'
@@ -20,7 +21,11 @@ class PauseButton extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <FontAwesome name="pause" className={styles.icon} />
+        <FontAwesome
+          name="pause"
+          className={styles.icon}
+          cssModule={faStyles}
+        />
       </div>
     )
   }
