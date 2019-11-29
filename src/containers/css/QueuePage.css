@@ -52,7 +52,19 @@
 
 .songInfoArea {
   float: left;
-  margin-left: 9px;
+}
+
+.songController {
+  list-style: none;
+  display: inline-block;
+  width: 225px;
+  text-align: center;
+  margin: auto;
+  margin-right: 18px;
+}
+
+.songController>li {
+  display: inline;
 }
 
 .button {

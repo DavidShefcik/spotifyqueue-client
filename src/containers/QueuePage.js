@@ -16,7 +16,10 @@ import styles from './css/QueuePage.css'
 import Code from '../components/queue/Code'
 import LoadingPage from '../components/LoadingPage'
 import RedButton from '../components/RedButton'
-import SongInfo from '../components/SongInfo'
+import SongInfo from '../components/queue/SongInfo'
+import PauseButton from '../components/queue/PauseButton'
+import NextButton from '../components/queue/NextButton'
+import BackButton from '../components/queue/BackButton'
 
 // Component
 class QueuePage extends Component {
@@ -121,8 +124,24 @@ class QueuePage extends Component {
                 />
               </div>
               {this.state.isOwner ? (
-                <div className={styles.button}>
-                  <RedButton text="End Session" action={() => window.alert()} />
+                <div>
+                  <ul className={styles.songController}>
+                    <li>
+                      <BackButton queueid={this.props.id} />
+                    </li>
+                    <li>
+                      <PauseButton queueid={this.props.id} />
+                    </li>
+                    <li>
+                      <NextButton queueid={this.props.id} />
+                    </li>
+                  </ul>
+                  <div className={styles.button}>
+                    <RedButton
+                      text="End Session"
+                      action={() => window.alert()}
+                    />
+                  </div>
                 </div>
               ) : (
                 <div className={styles.button}>

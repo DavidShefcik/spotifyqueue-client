@@ -1,0 +1,8 @@
+.container {
+  display: inline-block;
+  width: 75px;
+}
+
+.container>p {
+  display: inline-block;
+}

@@ -1,7 +1,7 @@
 /*
  * Author: David Shefcik
  * Created: 11/24/19
- * Project | File: Spotify Queue Client | src/components/Code.js
+ * Project | File: Spotify Queue Client | src/components/queue/Code.js
  */
 
 // Module imports

@@ -6,7 +6,7 @@
 
 // Module imports
 import React, { Component } from 'react'
-import axiosConfig from '../modules/axiosConfig'
+import axiosConfig from '../../modules/axiosConfig'
 import { connect } from 'react-redux'
 
 // CSS imports
