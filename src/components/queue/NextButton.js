@@ -12,12 +12,20 @@ import { connect } from 'react-redux'
 // CSS imports
 import styles from './css/SongController.css'
 
+// Component imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faForward } from '@fortawesome/free-solid-svg-icons'
+
 // Component
 class NextButton extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <p>Next</p>
+        <FontAwesomeIcon
+          icon={faForward}
+          className={styles.icon}
+          title="Next"
+        />
       </div>
     )
   }

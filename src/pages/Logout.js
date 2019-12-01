@@ -33,6 +33,9 @@ class Logout extends Component {
         if (process.env.PRODUCTION === 'false') {
           console.log(error)
         }
+        this.props.removeUser()
+        this.props.removeToken()
+        this.props.history.push('/')
         this.props.history.push('/error')
       })
   }

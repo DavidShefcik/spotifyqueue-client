@@ -25,7 +25,7 @@ class SongInfo extends Component {
     this.songInfo = this.songInfo.bind(this)
   }
   componentDidMount() {
-    if (Object.entries(this.props.song).length > 0) {
+    if (this.props.song.uri != undefined) {
       this.setState(
         {
           song: this.props.song
@@ -42,7 +42,7 @@ class SongInfo extends Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.song != prevProps.song) {
-      if (Object.entries(this.props.song).length > 0) {
+      if (this.props.song.uri != undefined) {
         this.setState(
           {
             song: this.props.song
@@ -60,9 +60,11 @@ class SongInfo extends Component {
   }
   songInfo() {
     let songID
+    let uri = this.state.song.uri
     let token = this.props.token
     try {
-      songID = this.state.song.uri.split('/')[4].split('?')[0]
+      uri = uri.split("/");
+      songID = uri[uri.length - 1].split("?")[0]
     } catch (e) {
       songID = this.state.song.uri
     }
@@ -92,7 +94,7 @@ class SongInfo extends Component {
       <div>
         {this.state.renderSong ? (
           Object.entries(this.state.song).length === 0 ? (
-            <p>No Song</p>
+            <p className={styles.noSong}>No Song</p>
           ) : (
             <div>
               <img

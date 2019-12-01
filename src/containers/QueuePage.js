@@ -34,7 +34,8 @@ class QueuePage extends Component {
       ownerName: '',
       renderPage: false,
       isOwner: false,
-      currentSong: {}
+      currentSong: {},
+      playing: false
     }
   }
   componentDidMount() {
@@ -49,7 +50,8 @@ class QueuePage extends Component {
             code: res['data']['queue']['code'],
             members: res['data']['queue']['members'],
             songs: res['data']['queue']['songs'],
-            ownerid: res['data']['queue']['ownerid']
+            ownerid: res['data']['queue']['ownerid'],
+            playing: res['data']['queue']['playing']
           },
           () => {
             if (this.state.songs.length > 0) {
@@ -125,23 +127,23 @@ class QueuePage extends Component {
               </div>
               {this.state.isOwner ? (
                 <div>
-                  <ul className={styles.songController}>
-                    <li>
-                      <BackButton queueid={this.props.id} />
-                    </li>
-                    <li>
-                      <PauseButton queueid={this.props.id} />
-                    </li>
-                    <li>
-                      <NextButton queueid={this.props.id} />
-                    </li>
-                  </ul>
                   <div className={styles.button}>
                     <RedButton
                       text="End Session"
                       action={() => window.alert()}
                     />
                   </div>
+                  <ul className={styles.songController}>
+                    <li>
+                      <BackButton queueid={this.props.id} />
+                    </li>
+                    <li>
+                      <PauseButton queueid={this.props.id} playing={this.state.playing} />
+                    </li>
+                    <li>
+                      <NextButton queueid={this.props.id} />
+                    </li>
+                  </ul>
                 </div>
               ) : (
                 <div className={styles.button}>

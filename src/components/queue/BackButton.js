@@ -12,12 +12,20 @@ import { connect } from 'react-redux'
 // CSS imports
 import styles from './css/SongController.css'
 
+// Component imports
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBackward } from '@fortawesome/free-solid-svg-icons'
+
 // Component
 class BackButton extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <p>Back</p>
+        <FontAwesomeIcon
+          icon={faBackward}
+          className={styles.icon}
+          title="Back"
+        />
       </div>
     )
   }

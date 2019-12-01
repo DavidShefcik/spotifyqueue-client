@@ -63,7 +63,7 @@
   margin-right: 18px;
 }
 
-.songController>li {
+.songController > li {
   display: inline;
 }
 
@@ -73,7 +73,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .code,
   .title {
     display: block;
@@ -89,5 +88,22 @@
   .queueContent {
     min-height: calc(100vh - 94px);
     width: 100%;
+  }
+
+  .queueController {
+    height: 100px;
+    overflow: auto;
+  }
+
+  .songInfoArea {
+    height: 50px;
+  }
+
+  .songController {
+    list-style: none;
+    display: inline-block;
+    width: 225px;
+    text-align: center;
+    margin: auto;
   }
 }
