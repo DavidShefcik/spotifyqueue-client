@@ -1,4 +1,4 @@
-# davidshefcik.com client
+# Spotify Queue client
 
 The client for my Spotify Queue project.
 
